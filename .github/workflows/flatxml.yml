@@ -6,7 +6,7 @@ on:
       - .github/workflows/flatxml.yml # Only run a new workflow every time this file (flat.yaml) file changes
   workflow_dispatch: # Required even though this is currently empty
   schedule:
-    - cron: '*/2 * * * *' # Run this workflow every 2 minutes
+    - cron: '*/5 * * * *' # Run this workflow every 2 minutes
 
 jobs:
   scheduled:
@@ -26,6 +26,6 @@ jobs:
         uses: githubocto/flat@v2
         with:
           # The data to fetch
-          http_url: https://api.openweathermap.org/data/2.5/weather?zip=06089,us&units=imperial&appid=2f6693b9f4d46362910292a9f0ad0bba&mpde=xml
+          http_url: https://api.openweathermap.org/data/2.5/weather?mode=xml&zip=06089,us&units=imperial&appid=2f6693b9f4d46362910292a9f0ad0bba
           downloaded_filename: weather-06089.xml
           # postprocess: weather-xml.ts
