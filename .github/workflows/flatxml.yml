@@ -28,4 +28,4 @@ jobs:
           # The data to fetch
           http_url: https://api.openweathermap.org/data/2.5/weather?mode=xml&zip=06089,us&units=imperial&appid=2f6693b9f4d46362910292a9f0ad0bba
           downloaded_filename: weather-06089.xml
-          # postprocess: weather-xml.ts
+          postprocess: weather-xml.ts
