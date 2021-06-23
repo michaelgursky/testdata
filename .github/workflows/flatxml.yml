@@ -3,13 +3,13 @@ name: FlatXML
 on:
   push:
     paths:
-      - .github/workflows/flatxml.yml # Only run a new workflow every time this file (flat.yaml) file changes
+      - .github/workflows/flatxml.yml # Only run a new workflow every time this file changes
   workflow_dispatch: # Required even though this is currently empty
   schedule:
-    - cron: '*/5 * * * *' # Run this workflow every 2 minutes
+    - cron: '*/5 * * * *' # Run this workflow every 5 minutes
 
 jobs:
-  scheduled:
+  job-:
     runs-on: ubuntu-latest
     steps: # This workflow has 3 steps
       # The first step is to check out the repository so it can read the files inside of it and do other operations
@@ -22,10 +22,16 @@ jobs:
           deno-version: v1.10
         # deno-version: v1.x
       # The third step is a Flat Action step. We fetch the data in the http_url and save it as downloaded_filename
-      - name: Fetch data 
+      - name: Fetch 06089 data 
         uses: githubocto/flat@v2
         with:
           # The data to fetch
           http_url: https://api.openweathermap.org/data/2.5/weather?mode=xml&zip=06089,us&units=imperial&appid=2f6693b9f4d46362910292a9f0ad0bba
           downloaded_filename: weather-06089.xml
           postprocess: weather-xml.ts
+      - name: Fetch 07093 data 
+        uses: githubocto/flat@v2
+        with:
+          http_url: https://api.openweathermap.org/data/2.5/weather?mode=xml&zip=07093,us&units=imperial&appid=2f6693b9f4d46362910292a9f0ad0bba
+          downloaded_filename: weather-07093.xml
+#          postprocess: weather-xml.ts
