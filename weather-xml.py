@@ -9,8 +9,8 @@ def csv_append(fn, dt, value):
 
 if __name__ == "__main__":
   print("args:")
-    for i in range(0, len(sys.argv)):
-      print(i, sys.argv[i])
+  for i in range(0, len(sys.argv)):
+    print(i, sys.argv[i])
   readingFile = "weather-06089.xml"
   tree = parse(readingFile).childNodes[0].childNodes
   city = [n for n in tree if n.nodeName == "city"][0].childNodes
