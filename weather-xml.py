@@ -1,3 +1,4 @@
+import sys
 import datetime
 import pandas as pd
 from xml.dom.minidom import parse, parseString
@@ -7,6 +8,9 @@ def csv_append(fn, dt, value):
   df.to_csv(fn, mode='a', index=False, header=False, date_format="%Y-%m-%dT%H:%M:%S")
 
 if __name__ == "__main__":
+  print("args:")
+    for i in range(0, len(sys.argv)):
+      print(i, sys.argv[i])
   readingFile = "weather-06089.xml"
   tree = parse(readingFile).childNodes[0].childNodes
   city = [n for n in tree if n.nodeName == "city"][0].childNodes
@@ -18,7 +22,6 @@ if __name__ == "__main__":
   dt = [n for n in tree if n.nodeName == "lastupdate"][0].getAttribute("value")
   ts = datetime.datetime.strptime(dt, "%Y-%m-%dT%H:%M:%S") + datetime.timedelta(seconds=int(tz))
   dt = ts.isoformat()
-  print("testing@", ts)
 
   csv_append("weather-temperature.csv", dt, temperature)
   csv_append("weather-humidity.csv", dt, humidity)
