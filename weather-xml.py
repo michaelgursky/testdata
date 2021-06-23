@@ -8,11 +8,10 @@ def csv_append(fn, dt, value):
   df.to_csv(fn, mode='a', index=False, header=False, date_format="%Y-%m-%dT%H:%M:%S")
 
 if __name__ == "__main__":
-  print("args:")
-  for i in range(0, len(sys.argv)):
-    print(i, sys.argv[i])
-  readingFile = "weather-06089.xml"
-  tree = parse(readingFile).childNodes[0].childNodes
+  inFile = sys.argv[1]
+  outBase = inFile.rstrip(".xml")
+  print(inFile, outBase)
+  tree = parse(inFile).childNodes[0].childNodes
   city = [n for n in tree if n.nodeName == "city"][0].childNodes
   tz = [n for n in city if n.nodeName == "timezone"][0].firstChild.nodeValue
   temperature = [n for n in tree if n.nodeName == "temperature"][0].getAttribute("value")
@@ -23,6 +22,6 @@ if __name__ == "__main__":
   ts = datetime.datetime.strptime(dt, "%Y-%m-%dT%H:%M:%S") + datetime.timedelta(seconds=int(tz))
   dt = ts.isoformat()
 
-  csv_append("weather-temperature.csv", dt, temperature)
-  csv_append("weather-humidity.csv", dt, humidity)
-  csv_append("weather-precipitation.csv", dt, precipitation)
+  csv_append(outBase + "-temperature.csv", dt, temperature)
+  csv_append(outBase + "-humidity.csv", dt, humidity)
+  csv_append(outBase + "-precipitation.csv", dt, precipitation)
