@@ -1,4 +1,4 @@
-import 'https://deno.land/x/flat@0.0.10/mod.ts'
+import 'https://deno.land/x/flat@0.0.14/mod.ts'
 
 // install requirements with pip
 const pip_install = Deno.run({
